@@ -1,0 +1,90 @@
+(*!------------------------------------------------------------
+ * [[APP_NAME]] ([[APP_URL]])
+ *
+ * @link      [[APP_REPOSITORY_URL]]
+ * @copyright Copyright (c) [[COPYRIGHT_YEAR]] [[COPYRIGHT_HOLDER]]
+ * @license   [[LICENSE_URL]] ([[LICENSE]])
+ *------------------------------------------------------------- *)
+unit AbstractQrCodeGeneratorImpl;
+
+interface
+
+{$MODE OBJFPC}
+{$H+}
+
+uses
+
+    fano,
+    Classes,
+    QlpIQrCode,
+    QrCodeGeneratorIntf;
+
+type
+
+    (*!-----------------------------------------------
+     * helper class that generate QR Code from string
+     *
+     * @author [[AUTHOR_NAME]] <[[AUTHOR_EMAIL]]>
+     *------------------------------------------------*)
+    TAbstractQrCodeGenerator = class(TInterfacedObject, IQrCodeGenerator)
+    protected
+        procedure writeQrCodeToStream(
+            const AQrCode : IQrCode;
+            AScale : Int32;
+            ABorder : Int32;
+            const stream : TStream
+        ); virtual; abstract;
+
+    public
+        (*!-----------------------------------------------
+         * generate QRCode and store it in stream
+         *------------------------------------------------
+         * @param data string to use to encode in QR Code
+         * @param aScale QRCode scale
+         * @param aBorder QRCode border
+         *------------------------------------------------*)
+        function generate(
+            const data : string;
+            AScale : Int32;
+            ABorder : Int32;
+        ) : IResponseStream;
+    end;
+
+implementation
+
+uses
+
+    QlpQrCode,
+    QlpIQrSegment,
+    QlpQrSegment,
+    QlpQrSegmentMode,
+    QlpBitBuffer,
+    QlpConverters,
+    QlpQRCodeGenLibTypes;
+
+    (*!-----------------------------------------------
+     * generate QRCode and store it in stream
+     *------------------------------------------------
+     * @param data string to use to encode in QR Code
+     * @param aScale QRCode scale
+     * @param aBorder QRCode border
+     *------------------------------------------------*)
+    function TAbstractQrCodeGenerator.generate(const data : string;
+        AScale : Int32;
+        ABorder : Int32;
+    ) : IResponseStream;
+    var
+        LErrCorLvl: TQrCode.TEcc;
+        LQrCode: IQrCode;
+        stream : TStream;
+    begin
+        // Low error correction level
+        LErrCorLvl := TQrCode.TEcc.eccLow;
+        LQrCode := TQrCode.EncodeText(data, LErrCorLvl, TEncoding.UTF8);
+        stream := TMemoryStream.create();
+        writeQrCodeStream(LQrCode, AScale, ABorder, stream);
+        result := TResponseStream.create(stream);
+    end;
+
+
+end.

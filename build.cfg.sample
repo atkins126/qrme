@@ -36,11 +36,27 @@
 #-Px86_64
 
 #----------------------------------------------
+# QRCodeGen library search path
+#----------------------------------------------
+-Fivendor/QRCodeGenLib4Pascal/QRCodeGenLib/src/Include
+-Fuvendor/QRCodeGenLib4Pascal/QRCodeGenLib/src/Interfaces
+-Fuvendor/QRCodeGenLib4Pascal/QRCodeGenLib/src/QRCodeGen
+-Fuvendor/QRCodeGenLib4Pascal/QRCodeGenLib/src/Utils
+
+#----------------------------------------------
 # Application Unit search path
 # USER_APP_DIR is contains user application base directory
 #----------------------------------------------
+-Fu$USER_APP_DIR$/Libraries\QrCode
+-Fu$USER_APP_DIR$/Libraries\QrCode\Contracts
 -Fu$USER_APP_DIR$/Dependencies
 -Fu$USER_APP_DIR$/Routes
+-Fu$USER_APP_DIR$/App/Home/Controllers
+-Fu$USER_APP_DIR$/App/Home/Controllers/Factories
+-Fu$USER_APP_DIR$/App/QrCodeGenerator/Controllers
+-Fu$USER_APP_DIR$/App/QrCodeGenerator/Controllers/Factories
+
+
 #-Fu$USER_APP_DIR$/path/to/other/units
 #-Fu$USER_APP_DIR$/path/to/other/units
 

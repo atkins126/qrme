@@ -9,3 +9,6 @@
 {%dependencies.inc}
 
 {---put your dependencies registration here---}
+
+container.add('homeController', THomeControllerFactory.create());
+container.add('qrcodegeneratorController', TQrCodeGeneratorControllerFactory.create());

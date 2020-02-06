@@ -1,3 +1,6 @@
 [submodule "vendor/fano"]
 	path = vendor/fano
 	url = https://github.com/fanoframework/fano.git
+[submodule "vendor/QRCodeGenLib4Pascal"]
+	path = vendor/QRCodeGenLib4Pascal
+	url = https://github.com/Xor-el/QRCodeGenLib4Pascal.git
