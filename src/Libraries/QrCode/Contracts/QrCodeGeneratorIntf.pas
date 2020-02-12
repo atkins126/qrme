@@ -14,7 +14,8 @@ interface
 
 uses
 
-    fano;
+    fano,
+    fpimage;
 
 type
 
@@ -32,11 +33,15 @@ type
          * generate QRCode and store it in stream
          *------------------------------------------------
          * @param data string to use to encode in QR Code
+         * @param colFg foreground color
+         * @param colBg background color
          * @param aScale QRCode scale
          * @param aBorder QRCode border
          *------------------------------------------------*)
         function generate(
             const data : string;
+            colFg : TFPColor;
+            colBg : TFPColor;
             AScale : Int32;
             ABorder : Int32
         ) : IResponseStream;

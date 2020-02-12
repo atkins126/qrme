@@ -16,7 +16,6 @@ uses
 
     fano,
     Classes,
-    fpimage,
     QlpIQrCode,
     QrCodeGeneratorIntf,
     AbstractQrCodeGeneratorImpl;
@@ -28,7 +27,7 @@ type
      *
      * @author [[AUTHOR_NAME]] <[[AUTHOR_EMAIL]]>
      *------------------------------------------------*)
-    TPngQrCodeGenerator = class(TAbstractQrCodeGenerator)
+    TSvgQrCodeGenerator = class(TAbstractQrCodeGenerator)
     protected
         procedure writeQrCodeToStream(
             const AQrCode : IQrCode;
@@ -48,27 +47,20 @@ uses
     QlpQrSegmentMode,
     QlpBitBuffer,
     QlpConverters,
-    QlpQRCodeGenLibTypes,
-    fpwritepng;
+    QlpQRCodeGenLibTypes;
 
-    procedure TPngQrCodeGenerator.writeQrCodeToStream(
+    procedure TSvgQrCodeGenerator.writeQrCodeToStream(
         const AQrCode : IQrCode;
         AScale : Int32;
         ABorder : Int32;
         const stream : TStream
     );
     var
-        img : TQRCodeGenLibBitmap;
-        writer : TFPCustomImageWriter;
+        img : TStringStream;
     begin
-        img := AQrCode.toBitmapImage(AScale, ABorder);
+        img := TStringStream.create(AQrCode.toSvgString(ABorder));
         try
-            writer := TFPWriterPng.create;
-            try
-                img.saveToStream(stream, writer);
-            finally
-                writer.free();
-            end;
+            stream.copyFrom(img, 0);
         finally
             img.free();
         end;

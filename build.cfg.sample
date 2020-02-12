@@ -49,6 +49,7 @@
 #----------------------------------------------
 -Fu$USER_APP_DIR$/Libraries\QrCode
 -Fu$USER_APP_DIR$/Libraries\QrCode\Contracts
+-Fu$USER_APP_DIR$/Libraries\Utils
 -Fu$USER_APP_DIR$/Dependencies
 -Fu$USER_APP_DIR$/Routes
 -Fu$USER_APP_DIR$/App/Home/Controllers

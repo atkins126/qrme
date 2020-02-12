@@ -16,6 +16,7 @@ uses
 
     fano,
     Classes,
+    fpimage,
     QlpIQrCode,
     QrCodeGeneratorIntf;
 
@@ -40,11 +41,15 @@ type
          * generate QRCode and store it in stream
          *------------------------------------------------
          * @param data string to use to encode in QR Code
+         * @param colFg foreground color
+         * @param colBg background color
          * @param aScale QRCode scale
          * @param aBorder QRCode border
          *------------------------------------------------*)
         function generate(
             const data : string;
+            colFg : TFPColor;
+            colBg : TFPColor;
             AScale : Int32;
             ABorder : Int32
         ) : IResponseStream;
@@ -69,8 +74,13 @@ uses
      * @param data string to use to encode in QR Code
      * @param aScale QRCode scale
      * @param aBorder QRCode border
+     * @param colFg foreground color
+     * @param colBg background color
      *------------------------------------------------*)
-    function TAbstractQrCodeGenerator.generate(const data : string;
+    function TAbstractQrCodeGenerator.generate(
+        const data : string;
+        colFg : TFPColor;
+        colBg : TFPColor;
         AScale : Int32;
         ABorder : Int32
     ) : IResponseStream;
@@ -83,6 +93,8 @@ uses
         LErrCorLvl := TQrCode.TEcc.eccLow;
         LQrCode := TQrCode.EncodeText(data, LErrCorLvl, TEncoding.UTF8);
         stream := TMemoryStream.create();
+        LQrCode.ForegroundColor := colFg;
+        LQrCode.BackgroundColor := colBg;
         writeQrCodeToStream(LQrCode, AScale, ABorder, stream);
         result := TResponseStream.create(stream);
     end;

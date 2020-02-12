@@ -41,7 +41,9 @@ implementation
 
 uses
 
-    SysUtils;
+    SysUtils,
+    fpimage,
+    HtmlColConv;
 
     constructor TQrCodeGeneratorController.create(const generator : IQrCodeGenerator);
     begin
@@ -61,13 +63,23 @@ uses
     ) : IResponse;
     var scale : int32;
         border : int32;
+        fgCol : TFPColor;
+        bgCol : TFPColor;
     begin
         scale := strToInt(request.getParam('sc', '10'));
         border := strToInt(request.getParam('bd', '4'));
+        fgCol := HtmlColorToColor(request.getParam('fg'), colRed);
+        bgCol := HtmlColorToColor(request.getParam('bg'), colWhite);
         result := TBinaryResponse.create(
             response.headers().clone() as IHeaders,
             'image/png',
-            fQrCodeGenerator.generate(request.getParam('ud'), scale, border)
+            fQrCodeGenerator.generate(
+                request.getParam('ud'),
+                fgCol,
+                bgCol,
+                scale,
+                border
+            )
         );
     end;
 
