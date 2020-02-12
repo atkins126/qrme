@@ -42,7 +42,7 @@ $ sudo fanocli --deploy-scgi=qrme.fano --web-server=nginx
 Please read [Deploy as SCGI application](https://doc.fano.web.id/deployment/scgi/) Fano Framework documentation for more information.
 
 If you do not have Fano CLI installed, you need to setup virtual host manually as shown in
-[Run with a Web Server](#run-with-web-server) section of this document.
+*Run with a Web Server* section of this document.
 
 After you setup virtual host, run application binary
 
@@ -134,7 +134,7 @@ environment variable. By default is `app.cgi` filename.
 
 ## Run
 
-### <a name="run-with-web-server></a>Run with a webserver
+### Run with a webserver
 
 Setup a virtual host. Please consult documentation of web server you use.
 
