@@ -121,9 +121,9 @@ If `BUILD_TYPE` environment variable is not set, production environment will be 
 ## Change executable output directory
 
 Compilation will output executable to directory defined in `EXEC_OUTPUT_DIR`
-environment variable. By default is `public` directory.
+environment variable. By default is `bin` directory.
 
-    $ EXEC_OUTPUT_DIR=/path/to/public/dir ./build.sh
+    $ EXEC_OUTPUT_DIR=/path/to/bin/dir ./build.sh
 
 ## Change executable name
 
