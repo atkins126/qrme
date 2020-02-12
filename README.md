@@ -8,7 +8,8 @@ command line tools to help scaffolding web application using Fano Framework.
 ## Requirement
 
 - [Free Pascal](https://www.freepascal.org/) >= 3.0
-- Web Server (Apache, nginx)
+- Web Server (Apache 2.4, nginx)
+- [mod_proxy_scgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_scgi.html) if using Apache
 - git
 - [Fano Web Framework](https://github.com/fanoframework/fano)
 - [QRCodeGenLib4Pascal](https://github.com/Xor-el/QRCodeGenLib4Pascal)
@@ -25,6 +26,23 @@ $ ./tools/config.setup.sh
 $ ./build.sh
 ```
 
+If you have [Fano CLI](https://github.com/fanoframework/fano-cli) installed, run
+
+```
+$ sudo fanocli --deploy-scgi=qrme.fano
+```
+
+Command above will setup virtual host for Apache using mod_proxy_scgi. If you have nginx,
+add `--web-server=nginx`
+
+```
+$ sudo fanocli --deploy-scgi=qrme.fano --web-server=nginx
+```
+
+Please read [Deploy as SCGI application](https://doc.fano.web.id/deployment/scgi/) Fano Framework documentation for more information.
+
+If you do not have Fano CLI installed,
+
 ### Free Pascal installation
 
 Make sure [Free Pascal](https://www.freepascal.org/) is installed. Run
@@ -35,7 +53,7 @@ If you see something like `Free Pascal Compiler version 3.0.4`,  you are good to
 
 Clone this repository
 
-    $ git clone git@github.com:fanofamework/fano-app.git --recursive
+    $ git clone git@github.com:zamronypj/qrme.git --recursive
 
 `--recursive` is needed so git also pull [Fano](https://github.com/fanoframework/fano) repository.
 
@@ -115,67 +133,34 @@ For example on Apache,
 
 ```
 <VirtualHost *:80>
-     ServerName www.example.com
-     DocumentRoot /home/example/public
 
-     <Directory "/home/example/public">
-         Options +ExecCGI
-         AllowOverride FileInfo
-         Require all granted
-         DirectoryIndex app.cgi
-         AddHandler cgi-script .cgi
-     </Directory>
+    ServerAdmin admin@qrme.fano
+    DocumentRoot "/home/zamroni/fun/qrme/QrMe/public"
+
+    ServerName qrme.fano
+    ServerAlias *.qrme.fano
+
+    ErrorLog /var/log/apache2/qrme.fano-error.log
+    CustomLog /var/log/apache2/qrme.fano-access.log combined
+
+    <Directory "/home/zamroni/fun/qrme/QrMe/public">
+        Options -MultiViews -FollowSymlinks +SymlinksIfOwnerMatch +ExecCGI
+        AllowOverride FileInfo Indexes
+        Require all granted
+    </Directory>
+
+    ProxyRequests Off
+    ProxyPassMatch "/css|js|images|img|plugins|bower_components(.*)" !
+    ProxyPassMatch ^/(.*)$ "scgi://127.0.0.1:20477"
 </VirtualHost>
-```
-On Apache, you will need to enable CGI module, such as `mod_cgi` or `mod_cgid`. If CGI module not loaded, above virtual host will cause `app.cgi` is downloaded instead of executed.
-
-For example, on Debian, this will enable `mod_cgi` module.
 
 ```
-$ sudo a2enmod cgi
+On Apache, you will need to enable SCGI module, `mod_proxy` and `mod_proxy_cgi`. In Apache 2.4, this modules is already installed and enabled. If not, then run
+
+```
+$ sudo a2enmod proxy_cgi
 $ sudo systemctl restart apache2
 ```
-
-Depending on your server setup, for example, if  you use `.htaccess`, add following code:
-
-```
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^(.*)$ app.cgi [L]
-</IfModule>
-```
-and put `.htaccess` file in same directory as `app.cgi` file (i.e., in `public` directory).
-
-Content of `.htaccess` basically tells Apache to serve existing files/directories directly. For any non-existing files/directories, pass them to our application.
-
-### Simulate run on command line
-
-```
-$ cd public
-$ REQUEST_METHOD=GET \
-  REQUEST_URI=/test/test \
-  SERVER_NAME=juhara.com \
-  ./app.cgi
-```
-
-`tools/simulate.run.sh` is bash script that can be used to simplify simulating run
-application in shell.
-
-    $ ./tools/simulate.run.sh
-
-or to change route to access, set `REQUEST_URI` variable.
-
-    $ REQUEST_URI=/test/test ./tools/simulate.run.sh
-
-This is similar to simulating browser requesting this page,for example,
-
-    $ wget -O- http://[your fano app hostname]/test/test
-
-However, running using `tools/simulate.run.sh` allows you to view output of `heaptrc`
-unit for detecting memory leak (if you enable `-gh` switch in `build.dev.cfg`).
-
 
 ## Deployment
 
