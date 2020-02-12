@@ -11,7 +11,7 @@ uses
 
 // convert HTML color string #rgb, #rrggbb to TFPColor
 // @credit https://wiki.freepascal.org/Convert_color_to/from_HTML
-function HtmlColorToColor(htmlCol: string; defaultCol : TFPColor): TFPColor;
+function HtmlColorToColor(const strHtmlCol : string; defaultCol : TFPColor): TFPColor;
 
 implementation
 
@@ -25,11 +25,13 @@ implementation
         Result:= ch in ['0'..'9', 'a'..'f', 'A'..'F'];
     end;
 
-    function HtmlColorToColor(htmlCol: string; defaultCol : TFPColor): TFPColor;
+    function HtmlColorToColor(const strHtmlCol: string; defaultCol : TFPColor): TFPColor;
     var
         colR, colG, colB: integer;
         i, len: integer;
+        htmlCol : string;
     begin
+        htmlCol := strHtmlCol;
         result:= defaultCol;
 
         len:= 0;
