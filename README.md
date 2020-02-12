@@ -1,6 +1,6 @@
-# Fano Web Framework Skeleton Application
+# QR Code generator web application
 
-Web application skeleton using Fano Framework, Pascal web application framework
+QR Code generator web application using Fano Framework, Pascal web application framework
 
 This project is generated using [Fano CLI](https://github.com/fanoframework/fano-cli)
 command line tools to help scaffolding web application using Fano Framework.
@@ -41,7 +41,8 @@ $ sudo fanocli --deploy-scgi=qrme.fano --web-server=nginx
 
 Please read [Deploy as SCGI application](https://doc.fano.web.id/deployment/scgi/) Fano Framework documentation for more information.
 
-If you do not have Fano CLI installed,
+If you do not have Fano CLI installed, you need to setup virtual host manually as shown in
+[Run with a Web Server](#run-with-web-server) section of this document.
 
 ### Free Pascal installation
 
@@ -125,7 +126,7 @@ environment variable. By default is `app.cgi` filename.
 
 ## Run
 
-### Run with a webserver
+### <a name="run-with-web-server></a>Run with a webserver
 
 Setup a virtual host. Please consult documentation of web server you use.
 
@@ -135,7 +136,7 @@ For example on Apache,
 <VirtualHost *:80>
 
     ServerAdmin admin@qrme.fano
-    DocumentRoot "/home/zamroni/fun/qrme/QrMe/public"
+    DocumentRoot "/path/to/repo/directory/public"
 
     ServerName qrme.fano
     ServerAlias *.qrme.fano
@@ -155,10 +156,10 @@ For example on Apache,
 </VirtualHost>
 
 ```
-On Apache, you will need to enable SCGI module, `mod_proxy` and `mod_proxy_cgi`. In Apache 2.4, this modules is already installed and enabled. If not, then run
+On Apache, you will need to enable SCGI module, `mod_proxy` and `mod_proxy_scgi`. In Apache 2.4, this modules is already installed and enabled. If not, then run
 
 ```
-$ sudo a2enmod proxy_cgi
+$ sudo a2enmod proxy_scgi
 $ sudo systemctl restart apache2
 ```
 
