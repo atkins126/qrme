@@ -44,6 +44,14 @@ Please read [Deploy as SCGI application](https://doc.fano.web.id/deployment/scgi
 If you do not have Fano CLI installed, you need to setup virtual host manually as shown in
 [Run with a Web Server](#run-with-web-server) section of this document.
 
+After you setup virtual host, run application binary
+
+```
+$ ./bin/app.cgi
+```
+
+Open Internet browser and go to URL http://qrme.fano/qrcode to generate QR Code.
+
 ### Free Pascal installation
 
 Make sure [Free Pascal](https://www.freepascal.org/) is installed. Run
