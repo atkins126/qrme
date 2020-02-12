@@ -64,7 +64,7 @@ Clone this repository
 
     $ git clone git@github.com:zamronypj/qrme.git --recursive
 
-`--recursive` is needed so git also pull [Fano](https://github.com/fanoframework/fano) repository.
+`--recursive` is needed so git also pull [Fano](https://github.com/fanoframework/fano) and [QRCodeGenLib4Pascal](https://github.com/Xor-el/QRCodeGenLib4Pascal) repository.
 
 If you are missing `--recursive` when you clone, you may find that `vendor/fano` directory is empty. In this case run
 
