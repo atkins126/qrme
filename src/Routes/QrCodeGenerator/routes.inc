@@ -6,4 +6,4 @@
  * @license   [[LICENSE_URL]] ([[LICENSE]])
  *------------------------------------------------------------- *)
 
-router.get('/qrcode', container.get('qrqodegeneratorController') as IRequestHandler);
+router.get('/qrcode', container.get('qrcodeGeneratorController') as IRequestHandler);

@@ -46,7 +46,7 @@ type
         function generate(
             const data : string;
             AScale : Int32;
-            ABorder : Int32;
+            ABorder : Int32
         ) : IResponseStream;
     end;
 
@@ -54,6 +54,7 @@ implementation
 
 uses
 
+    SysUtils,
     QlpQrCode,
     QlpIQrSegment,
     QlpQrSegment,
@@ -71,7 +72,7 @@ uses
      *------------------------------------------------*)
     function TAbstractQrCodeGenerator.generate(const data : string;
         AScale : Int32;
-        ABorder : Int32;
+        ABorder : Int32
     ) : IResponseStream;
     var
         LErrCorLvl: TQrCode.TEcc;
@@ -82,7 +83,7 @@ uses
         LErrCorLvl := TQrCode.TEcc.eccLow;
         LQrCode := TQrCode.EncodeText(data, LErrCorLvl, TEncoding.UTF8);
         stream := TMemoryStream.create();
-        writeQrCodeStream(LQrCode, AScale, ABorder, stream);
+        writeQrCodeToStream(LQrCode, AScale, ABorder, stream);
         result := TResponseStream.create(stream);
     end;
 

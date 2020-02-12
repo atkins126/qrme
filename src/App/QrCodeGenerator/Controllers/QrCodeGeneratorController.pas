@@ -39,6 +39,10 @@ type
 
 implementation
 
+uses
+
+    SysUtils;
+
     constructor TQrCodeGeneratorController.create(const generator : IQrCodeGenerator);
     begin
         fQrCodeGenerator := generator;
@@ -55,15 +59,15 @@ implementation
         const response : IResponse;
         const args : IRouteArgsReader
     ) : IResponse;
+    var scale : int32;
+        border : int32;
     begin
-        result := TBinaryResponse(
-            response.headers().clone(),
+        scale := strToInt(request.getParam('sc', '10'));
+        border := strToInt(request.getParam('bd', '4'));
+        result := TBinaryResponse.create(
+            response.headers().clone() as IHeaders,
             'image/png',
-            fQrCodeGenerator.generate(
-                request.getParam('ud'),
-                10,
-                4
-            )
+            fQrCodeGenerator.generate(request.getParam('ud'), scale, border)
         );
     end;
 

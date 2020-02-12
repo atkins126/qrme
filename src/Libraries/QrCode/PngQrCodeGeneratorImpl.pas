@@ -47,7 +47,9 @@ uses
     QlpQrSegmentMode,
     QlpBitBuffer,
     QlpConverters,
-    QlpQRCodeGenLibTypes;
+    QlpQRCodeGenLibTypes,
+    fpimage,
+    fpwritepng;
 
     procedure TPngQrCodeGenerator.writeQrCodeToStream(
         const AQrCode : IQrCode;
@@ -56,13 +58,19 @@ uses
         const stream : TStream
     );
     var
-        LPng: TPortableNetworkGraphic;
+        img : TQRCodeGenLibBitmap;
+        writer : TFPCustomImageWriter;
     begin
-        LPng := AQrCode.ToPngImage(AScale, ABorder);
+        img := AQrCode.toBitmapImage(AScale, ABorder);
         try
-            LPng.saveToStream(stream);
+            writer := TFPWriterPng.create;
+            try
+                img.saveToStream(stream, writer);
+            finally
+                writer.free();
+            end;
         finally
-            LPng.Free;
+            img.free();
         end;
     end;
 
