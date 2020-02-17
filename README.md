@@ -53,7 +53,16 @@ After you setup virtual host, run application binary
 $ ./bin/app.cgi
 ```
 
-Open Internet browser and go to URL http://qrme.fano/qrcode to generate QR Code.
+Open Internet browser and go to URL http://qrme.fano/qrcode/svg or
+http://qrme.fano/qrcode/png to generate QR Code with SVG or PNG format respectively.
+
+Both URL accept query string parameters to customize QR Code,
+
+- `ud` to set value to encode in QR Code, for example, `ud=hello%20world`.
+- `fg` to set foreground color, for example, `fg=%23ff0000` to set color to red.
+- `bg` to set background color, for example, `bg=%230000f0` to set color to purple.
+- `sc` to set scale, for example, `sc=12`.
+- `bd` to set border, for example, `bd=2`.
 
 ### Free Pascal installation
 
