@@ -10,18 +10,20 @@ unit QrCodeGeneratorControllerFactory;
 interface
 
 uses
-    fano;
+
+    fano,
+    QrConfigTypes;
 
 type
 
     (*!-----------------------------------------------
-     * Factory for controller TQrQodeGeneratorController
+     * Factory for controller TQrCodeGeneratorController
      *
      * @author [[AUTHOR_NAME]] <[[AUTHOR_EMAIL]]>
      *------------------------------------------------*)
     TQrCodeGeneratorControllerFactory = class(TFactory, IDependencyFactory)
-    public
-        function build(const container : IDependencyContainer) : IDependency; override;
+    protected
+        function getDefaultCfg(const config : IAppConfiguration) : TQrConfig;
     end;
 
 implementation
@@ -30,27 +32,13 @@ uses
 
     sysutils,
     fpimage,
-    QrConfigTypes,
-    HtmlColConv,
-    PngQrCodeGeneratorImpl,
-    {*! -------------------------------
-        unit interfaces
-    ----------------------------------- *}
-    QrCodeGeneratorController;
+    HtmlColConv;
 
-    function TQrCodeGeneratorControllerFactory.build(const container : IDependencyContainer) : IDependency;
-    var
-        defaultCfg : TQrConfig;
-        config : IAppConfiguration;
+    function TQrCodeGeneratorControllerFactory.getDefaultCfg(const config : IAppConfiguration) : TQrConfig;
     begin
-        config := container['config'] as IAppConfiguration;
-        defaultcfg.fgCol := HtmlColorToColor(config.getString('qrcode.default.fgColor'), colBlack);
-        defaultCfg.bgCol := HtmlColorToColor(config.getString('qrcode.default.bgColor'), colWhite);
-        defaultCfg.scale := config.getInt('qrcode.default.scale');
-        defaultCfg.border := config.getInt('qrcode.default.border');
-        result := TQrCodeGeneratorController.create(
-            TPngQrCodeGenerator.create(),
-            defaultCfg
-        );
+        result.fgCol := HtmlColorToColor(config.getString('qrcode.default.fgColor'), colBlack);
+        result.bgCol := HtmlColorToColor(config.getString('qrcode.default.bgColor'), colWhite);
+        result.scale := config.getInt('qrcode.default.scale');
+        result.border := config.getInt('qrcode.default.border');
     end;
 end.

@@ -45,7 +45,9 @@ uses
      *----------------------------------- *)
     {---- put your controller factory here ---},
     HomeControllerFactory,
-    QrCodeGeneratorControllerFactory;
+    QrCodeGeneratorControllerFactory,
+    PngQrCodeGeneratorControllerFactory,
+    SvgQrCodeGeneratorControllerFactory;
 
 
 

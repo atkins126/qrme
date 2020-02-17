@@ -5,7 +5,7 @@
  * @copyright Copyright (c) [[COPYRIGHT_YEAR]] [[COPYRIGHT_HOLDER]]
  * @license   [[LICENSE_URL]] ([[LICENSE]])
  *------------------------------------------------------------- *)
-unit PngQrCodeGeneratorImpl;
+unit SvgQrCodeGeneratorImpl;
 
 interface
 
@@ -35,6 +35,12 @@ type
             ABorder : Int32;
             const stream : TStream
         ); override;
+    public
+        (*!-----------------------------------------------
+         * get content type of this QRCode
+         * @return content type of QRCode
+         *------------------------------------------------*)
+        function contentType() : string; override;
     end;
 
 implementation

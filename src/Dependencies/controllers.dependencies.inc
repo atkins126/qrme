@@ -11,4 +11,5 @@
 {---put your dependencies registration here---}
 
 container.add('homeController', THomeControllerFactory.create());
-container.add('qrcodeGeneratorController', TQrCodeGeneratorControllerFactory.create());
+container.add('pngQrCodeGeneratorCtrl', TPngQrCodeGeneratorControllerFactory.create());
+container.add('svgQrCodeGeneratorCtrl', TSvgQrCodeGeneratorControllerFactory.create());
