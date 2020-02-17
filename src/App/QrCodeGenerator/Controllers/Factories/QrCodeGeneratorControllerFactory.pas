@@ -30,6 +30,7 @@ uses
 
     sysutils,
     fpimage,
+    QrConfigTypes,
     HtmlColConv,
     PngQrCodeGeneratorImpl,
     {*! -------------------------------
@@ -39,23 +40,17 @@ uses
 
     function TQrCodeGeneratorControllerFactory.build(const container : IDependencyContainer) : IDependency;
     var
-        defaultFgCol : TFPColor;
-        defaultBgCol : TFPColor;
-        defaultScale : int32;
-        defaultBorder : int32;
+        defaultCfg : TQrConfig;
         config : IAppConfiguration;
     begin
         config := container['config'] as IAppConfiguration;
-        defaultFgCol := HtmlColorToColor(config.getString('qrcode.default.fgColor'), colBlack);
-        defaultbgCol := HtmlColorToColor(config.getString('qrcode.default.bgColor'), colWhite);
-        defaultScale := config.getInt('qrcode.default.scale');
-        defaultBorder := config.getInt('qrcode.default.border');
+        defaultcfg.fgCol := HtmlColorToColor(config.getString('qrcode.default.fgColor'), colBlack);
+        defaultCfg.bgCol := HtmlColorToColor(config.getString('qrcode.default.bgColor'), colWhite);
+        defaultCfg.scale := config.getInt('qrcode.default.scale');
+        defaultCfg.border := config.getInt('qrcode.default.border');
         result := TQrCodeGeneratorController.create(
             TPngQrCodeGenerator.create(),
-            defaultFgCol,
-            defaultBgCol,
-            defaultScale,
-            defaultBorder
+            defaultCfg
         );
     end;
 end.

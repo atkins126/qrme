@@ -13,7 +13,8 @@ uses
 
     fano,
     fpimage,
-    QrCodeGeneratorIntf;
+    QrCodeGeneratorIntf,
+    QrConfigTypes;
 
 type
 
@@ -28,17 +29,11 @@ type
     TQrCodeGeneratorController = class(TAbstractController)
     private
         fQrCodeGenerator : IQrCodeGenerator;
-        fDefaultFgCol : TFPColor;
-        fDefaultBgCol : TFPColor;
-        fDefaultScale : int32;
-        fDefaultBorder : int32;
+        fDefaultCfg : TQrConfig;
     public
         constructor create(
             const generator : IQrCodeGenerator;
-            const defaultFgCol : TFPColor;
-            const defaultBgCol : TFPColor;
-            const defaultScale : int32;
-            const defaultBorder : int32
+            const defaultCfg : TQrConfig
         );
         destructor destroy(); override;
         function handleRequest(
@@ -57,17 +52,11 @@ uses
 
     constructor TQrCodeGeneratorController.create(
         const generator : IQrCodeGenerator;
-        const defaultFgCol : TFPColor;
-        const defaultBgCol : TFPColor;
-        const defaultScale : int32;
-        const defaultBorder : int32
+        const defaultCfg : TQrConfig
     );
     begin
         fQrCodeGenerator := generator;
-        fDefaultFgCol := defaultFgCol;
-        fDefaultBgCol := defaultBgCol;
-        fDefaultScale := defaultScale;
-        fDefaultBorder := defaultBorder;
+        fDefaultCfg := defaultCfg;
     end;
 
     destructor TQrCodeGeneratorController.destroy();
@@ -93,7 +82,7 @@ uses
             scale := strToInt(param);
         end else
         begin
-            scale := fDefaultScale;
+            scale := fDefaultCfg.scale;
         end;
 
         param := request.getParam('bd');
@@ -102,25 +91,25 @@ uses
             border := strToInt(param);
         end else
         begin
-            border := fDefaultBorder;
+            border := fDefaultCfg.border;
         end;
 
         param := request.getParam('fg');
         if (param <> '') then
         begin
-            fgCol := HtmlColorToColor(param, fDefaultFgCol);
+            fgCol := HtmlColorToColor(param, fDefaultCfg.fgCol);
         end else
         begin
-            fgCol := fDefaultFgCol;
+            fgCol := fDefaultCfg.fgCol;
         end;
 
         param := request.getParam('bg');
         if (param <> '') then
         begin
-            bgCol := HtmlColorToColor(param, fDefaultBgCol);
+            bgCol := HtmlColorToColor(param, fDefaultCfg.bgCol);
         end else
         begin
-            bgCol := fDefaultBgCol;
+            bgCol := fDefaultCfg.bgCol;
         end;
 
         result := TBinaryResponse.create(
