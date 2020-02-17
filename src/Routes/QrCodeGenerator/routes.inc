@@ -7,4 +7,4 @@
  *------------------------------------------------------------- *)
 
 router.get('/qrcode/png', container['pngQrCodeGeneratorCtrl'] as IRequestHandler);
-router.get('/qrcode/svg', container['pngQrCodeGeneratorCtrl'] as IRequestHandler);
+router.get('/qrcode/svg', container['svgQrCodeGeneratorCtrl'] as IRequestHandler);
