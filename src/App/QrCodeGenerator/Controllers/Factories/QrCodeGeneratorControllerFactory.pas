@@ -17,11 +17,11 @@ uses
 type
 
     (*!-----------------------------------------------
-     * Factory for controller TQrCodeGeneratorController
+     * Abstract factory for controller TQrCodeGeneratorController
      *
      * @author [[AUTHOR_NAME]] <[[AUTHOR_EMAIL]]>
      *------------------------------------------------*)
-    TQrCodeGeneratorControllerFactory = class(TFactory, IDependencyFactory)
+    TQrCodeGeneratorControllerFactory = class abstract (TFactory, IDependencyFactory)
     protected
         function getDefaultCfg(const config : IAppConfiguration) : TQrConfig;
     end;
