@@ -66,4 +66,12 @@ uses
         end;
     end;
 
+    (*!-----------------------------------------------
+     * get content type of this QRCode
+     * @return content type of QRCode
+     *------------------------------------------------*)
+    function TSvgQrCodeGenerator.contentType() : string;
+    begin
+        result := 'image/svg+xml';
+    end;
 end.

@@ -37,6 +37,7 @@ type
          * @param colBg background color
          * @param aScale QRCode scale
          * @param aBorder QRCode border
+         * @return QRCode stream
          *------------------------------------------------*)
         function generate(
             const data : string;
@@ -45,6 +46,12 @@ type
             AScale : Int32;
             ABorder : Int32
         ) : IResponseStream;
+
+        (*!-----------------------------------------------
+         * get content type of this QRCode
+         * @return content type of QRCode
+         *------------------------------------------------*)
+        function contentType() : string;
 
     end;
 

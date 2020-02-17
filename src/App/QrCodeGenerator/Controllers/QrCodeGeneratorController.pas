@@ -114,7 +114,7 @@ uses
 
         result := TBinaryResponse.create(
             response.headers().clone() as IHeaders,
-            'image/png',
+            fQrCodeGenerator.contentType(),
             fQrCodeGenerator.generate(
                 request.getParam('ud'),
                 fgCol,

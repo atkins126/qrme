@@ -53,6 +53,12 @@ type
             AScale : Int32;
             ABorder : Int32
         ) : IResponseStream;
+
+        (*!-----------------------------------------------
+         * get content type of this QRCode
+         * @return content type of QRCode
+         *------------------------------------------------*)
+        function contentType() : string; virtual; abstract;
     end;
 
 implementation

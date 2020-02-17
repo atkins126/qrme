@@ -36,6 +36,12 @@ type
             ABorder : Int32;
             const stream : TStream
         ); override;
+    public
+        (*!-----------------------------------------------
+         * get content type of this QRCode
+         * @return content type of QRCode
+         *------------------------------------------------*)
+        function contentType() : string; override;
     end;
 
 implementation
@@ -72,6 +78,15 @@ uses
         finally
             img.free();
         end;
+    end;
+
+    (*!-----------------------------------------------
+     * get content type of this QRCode
+     * @return content type of QRCode
+     *------------------------------------------------*)
+    function TPngQrCodeGenerator.contentType() : string;
+    begin
+        result := 'image/png';
     end;
 
 end.
