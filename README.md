@@ -24,6 +24,9 @@ Make sure that Free Pascal compiler is installed.
 $ git clone git@github.com:zamronypj/qrme.git --recursive
 $ ./tools/config.setup.sh
 $ ./build.sh
+$ mkdir storages
+$ mkdir storages/logs
+$ mkdir storages/sessions
 ```
 
 If you have [Fano CLI](https://github.com/fanoframework/fano-cli) installed, run

@@ -1,0 +1,29 @@
+{
+    "appName" : "QrMe",
+
+    "baseUrl" : "http://qrme.fano",
+
+    "secretKey" : "hush hush secret key you should replace for example with fanocli --key",
+
+    "session" : {
+        "name" : "fano_sess",
+        "dir" : "storages/sessions/"
+    },
+
+    "cookie" : {
+        "name" : "fano_sess",
+        "domain" : "qrme.fano",
+        "maxAge" : 3600
+    },
+
+    "qrcode" : {
+        "default" : {
+            "scale" : 10,
+            "border" : 2,
+            "fgColor" : "#000000",
+            "bgColor" : "#ffffff"
+        }
+    },
+
+    "isProduction" : false
+}
