@@ -85,11 +85,44 @@ uses
         border : int32;
         fgCol : TFPColor;
         bgCol : TFPColor;
+        param : string;
     begin
-        scale := strToInt(request.getParam('sc', '10'));
-        border := strToInt(request.getParam('bd', '4'));
-        fgCol := HtmlColorToColor(request.getParam('fg'), colRed);
-        bgCol := HtmlColorToColor(request.getParam('bg'), colWhite);
+        param := request.getParam('sc');
+        if (param <> '') then
+        begin
+            scale := strToInt(param);
+        end else
+        begin
+            scale := fDefaultScale;
+        end;
+
+        param := request.getParam('bd');
+        if (param <> '') then
+        begin
+            border := strToInt(param);
+        end else
+        begin
+            border := fDefaultBorder;
+        end;
+
+        param := request.getParam('fg');
+        if (param <> '') then
+        begin
+            fgCol := HtmlColorToColor(param, fDefaultFgCol);
+        end else
+        begin
+            fgCol := fDefaultFgCol;
+        end;
+
+        param := request.getParam('bg');
+        if (param <> '') then
+        begin
+            bgCol := HtmlColorToColor(param, fDefaultBgCol);
+        end else
+        begin
+            bgCol := fDefaultBgCol;
+        end;
+
         result := TBinaryResponse.create(
             response.headers().clone() as IHeaders,
             'image/png',
