@@ -56,6 +56,27 @@
 -Fu$USER_APP_DIR$/App/Home/Controllers/Factories
 -Fu$USER_APP_DIR$/App/QrCodeGenerator/Controllers
 -Fu$USER_APP_DIR$/App/QrCodeGenerator/Controllers/Factories
+-Fu$USER_APP_DIR$/App/Auth/Controllers
+-Fu$USER_APP_DIR$/App/Auth/Controllers/Factories
+-Fu$USER_APP_DIR$/App/Login/Controllers
+-Fu$USER_APP_DIR$/App/Login/Controllers/Factories
+-Fu$USER_APP_DIR$/Middlewares/AuthOnly
+-Fu$USER_APP_DIR$/Middlewares/AuthOnly/Factories
+-Fu$USER_APP_DIR$/App/NotLoggedIn/Controllers
+-Fu$USER_APP_DIR$/App/NotLoggedIn/Controllers/Factories
+-Fu$USER_APP_DIR$/App/Dashboard/Controllers
+-Fu$USER_APP_DIR$/App/Dashboard/Controllers/Factories
+-Fu$USER_APP_DIR$/App/Login/Views
+-Fu$USER_APP_DIR$/App/Login/Views/Factories
+-Fu$USER_APP_DIR$/App/Core/Views
+-Fu$USER_APP_DIR$/App/Core/Views/Factories
+
+
+
+
+
+
+
 
 
 #-Fu$USER_APP_DIR$/path/to/other/units

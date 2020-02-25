@@ -47,7 +47,22 @@ uses
     HomeControllerFactory,
     QrCodeGeneratorControllerFactory,
     PngQrCodeGeneratorControllerFactory,
-    SvgQrCodeGeneratorControllerFactory;
+    SvgQrCodeGeneratorControllerFactory,
+    AuthControllerFactory,
+    LoginControllerFactory,
+    AuthOnlyMiddlewareFactory,
+    NotLoggedInControllerFactory,
+    DashboardControllerFactory,
+    LoginViewFactory,
+
+    BottomJsViewPartialFactory,
+    TopCssViewPartialFactory,
+    TopBarViewPartialFactory,
+    LeftMenuViewPartialFactory,
+    BreadcrumbViewPartialFactory,
+    FooterViewPartialFactory,
+    FullViewPartialFactory,
+    MainViewPartialFactory;
 
 
 

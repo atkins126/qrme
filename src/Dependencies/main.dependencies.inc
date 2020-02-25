@@ -6,3 +6,5 @@
  * @license   [[LICENSE_URL]] ([[LICENSE]])
  *------------------------------------------------------------- *)
 
+container.add('tplParser', TTemplateParserFactory.create());
+container.add('tplReader', TStringFileReaderFactory.create());

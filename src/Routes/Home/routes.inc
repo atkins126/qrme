@@ -6,4 +6,4 @@
  * @license   [[LICENSE_URL]] ([[LICENSE]])
  *------------------------------------------------------------- *)
 
-router.get('/', container.get('homeController') as IRequestHandler);
+router.get('/', container['homeController'] as IRequestHandler);

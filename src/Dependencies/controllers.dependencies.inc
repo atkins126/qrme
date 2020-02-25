@@ -13,3 +13,9 @@
 container.add('homeController', THomeControllerFactory.create());
 container.add('pngQrCodeGeneratorCtrl', TPngQrCodeGeneratorControllerFactory.create());
 container.add('svgQrCodeGeneratorCtrl', TSvgQrCodeGeneratorControllerFactory.create());
+
+container.add('authController', TAuthControllerFactory.create());
+container.add('loginController', TLoginControllerFactory.create());
+container.add('notLoggedInCtrl', TNotLoggedInControllerFactory.create());
+
+container.add('dashboardController', TDashboardControllerFactory.create());
